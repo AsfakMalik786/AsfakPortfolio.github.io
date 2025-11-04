@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asfak Malek | Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* --- BASE THEME (LIGHT MODE - SHIFTED TO EMERALD/TEAL) --- */
+        :root {
+            --bg-start: #e0f2f1; /* Light teal-50 */
+            --bg-end: #f0fdfa;   /* Light mint */
+            --text-color: #1f2937; /* Dark gray text */
+            --header-text: #059669; /* Emerald-600 for primary color */
+            --sphere-1-start: #34d399; /* Emerald-400 */
+            --sphere-1-end: #06b6d4; /* Cyan-500 */
+            --sphere-2-start: #99f6e4; /* Teal-200 */
+            --sphere-2-end: #22d3ee; /* Cyan-400 */
+            --sphere-3-start: #fbcfe8; /* Pink-200 (keeping one warm tone) */
+            --sphere-3-end: #c7d2fe; /* Indigo-200 */
+            --glass-bg-opacity: 0.25;
+            --glass-border-opacity: 0.4;
+            --footer-bg: rgba(255, 255, 255, 0.7);
+        }
+
+        /* --- DARK MODE OVERRIDES (DARK EMERALD/TEAL) --- */
+        .dark {
+            --bg-start: #0f172a; /* Slate 900 */
+            --bg-end: #1e293b;   /* Slate 800 */
+            --text-color: #f1f5f9; /* Light gray text */
+            --header-text: #6ee7b7; /* Emerald-300 */
+            --sphere-1-start: #10b981; /* Emerald-500 */
+            --sphere-1-end: #0ea5e9; /* Sky-500 */
+            --sphere-2-start: #0f766e; /* Teal-700 */
+            --sphere-2-end: #2dd4bf; /* Teal-300 */
+            --sphere-3-start: #4c1d95; /* Retaining a deep violet hint */
+            --sphere-3-end: #7e22ce;
+            --glass-bg-opacity: 0.2;
+            --glass-border-opacity: 0.5;
+            --footer-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        /* --- GLOBAL STYLES --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%); 
+            color: var(--text-color);
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        /* Hero Background Elements */
+        .sphere-bg {
+            position: absolute;
+            width: 30vw;
+            height: 30vw;
+            min-width: 250px;
+            min-height: 250px;
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(80px); 
+            z-index: 1; 
+            pointer-events: none;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .sphere-1 {
+            top: 10vh; left: 5vw;
+            background: radial-gradient(circle, var(--sphere-1-start), var(--sphere-1-end));
+        }
+        .sphere-2 {
+            bottom: 5vh; right: 10vw;
+            background: radial-gradient(circle, var(--sphere-2-start), var(--sphere-2-end)); 
+        }
+        .sphere-3 {
+            top: 40vh; right: 0; width: 40vw; height: 40vw;
+            background: radial-gradient(circle, var(--sphere-3-start), var(--sphere-3-end));
+            opacity: 0.5;
+        }
+
+        /* The Core Glass Card Style */
+        .glass-panel {
+            background: rgba(255, 255, 255, var(--glass-bg-opacity));
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); 
+            transition: all 0.5s ease;
+        }
+
+        /* Glass Buttons for CTAs - Updated to Emerald Theme */
+        .glass-button {
+            background-color: rgba(16, 185, 129, 0.2); /* Emerald 500 base */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(52, 211, 153, 0.4); /* Emerald 400 border */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            color: #059669; /* Emerald 600 text */
+            transition: all 0.3s ease;
+        }
+        .dark .glass-button {
+            background-color: rgba(5, 150, 105, 0.2); /* Darker emerald base */
+            border-color: rgba(6, 78, 59, 0.5); /* Darker border */
+            color: #6ee7b7; /* Light emerald text */
+        }
+
+        .glass-button:hover {
+            background-color: rgba(16, 185, 129, 0.4); 
+            border-color: rgba(16, 185, 129, 0.6);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Social Media Icons/Buttons */
+        .social-glass-icon {
+            @apply p-3 rounded-full shadow-md transition duration-300;
+            background: rgba(255, 255, 255, 0.5); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #4b5563; /* light text */
+        }
+
+        .dark .social-glass-icon {
+            background: rgba(0, 0, 0, 0.3); 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #d1d5db; /* dark text */
+        }
+
+        .social-glass-icon:hover {
+            background: rgba(16, 185, 129, 0.2); /* Emerald hover effect */
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+        
+        /* --- Toggle Switch Styling (Matching the Vibe) --- */
+        .theme-toggle-container {
+            position: relative;
+            width: 80px; 
+            height: 36px;
+            border-radius: 9999px; /* rounded-full */
+            cursor: pointer;
+            overflow: hidden;
+            
+            /* Background gradient for the toggle container - Updated to Emerald/Cyan */
+            background: linear-gradient(90deg, #34d399, #06b6d4); 
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .dark .theme-toggle-container {
+            background: linear-gradient(90deg, #059669, #0891b2); /* Darker version */
+        }
+
+        .theme-toggle-slider {
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9); /* Opaque white slider */
+            transition: transform 0.3s ease-in-out, background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark .theme-toggle-slider {
+            transform: translateX(44px); /* Move to the right for dark mode */
+            background-color: rgba(0, 0, 0, 0.9); /* Opaque dark slider */
+        }
+
+        .theme-icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            color: rgba(255, 255, 255, 0.8); /* Light icon color */
+            transition: color 0.3s;
+        }
+
+        .theme-icon.light-icon { left: 0; }
+        .theme-icon.dark-icon { right: 0; }
+
+        .dark .theme-icon {
+            color: rgba(0, 0, 0, 0.8); /* Dark icon color */
+        }
+        
+        /* Fix for color of text elements that change in dark mode */
+        .color-primary-text { color: var(--header-text); }
+        .dark .color-primary-text { color: var(--header-text); }
+        .text-gray-700 { color: var(--text-color); }
+        .dark .text-gray-700 { color: var(--text-color); }
+
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f3f4f6; }
+        ::-webkit-scrollbar-thumb { background: #a5b4fc; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #818cf8; }
+        .dark ::-webkit-scrollbar-track { background: #1f2937; }
+        .dark ::-webkit-scrollbar-thumb { background: #4f46e5; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+
+
+        /* --- Section Transitions --- */
+        .section-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.0s ease-out, transform 1.0s ease-out;
+        }
+
+        .section-content.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .code-icon { stroke: currentColor; stroke-width: 2; }
+
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Hero Background Spheres -->
+    <div class="sphere-bg sphere-1"></div>
+    <div class="sphere-bg sphere-2 hidden md:block"></div>
+    <div class="sphere-bg sphere-3 hidden lg:block"></div>
+    
+    <!-- Header & Navigation (Double Layer Glass) -->
+    <header class="sticky top-0 z-50 transition-colors duration-300 pt-6 px-4 bg-transparent">
+        <div class="glass-panel mx-auto w-full md:max-w-4xl rounded-full py-2 px-6">
+            <nav class="flex justify-between items-center">
+                <a href="#home" class="text-xl md:text-2xl font-bold color-primary-text hover:text-emerald-800 transition duration-300">
+                    <img src="student.png" width="60dp" height="60dp" alt="Asfak">
+                </a>
+                <div class="flex items-center space-x-6">
+                    <!-- Navigation Links (Desktop) -->
+                    <div class="space-x-4 md:space-x-8 hidden md:flex">
+                        <a href="#about" class="text-gray-700 hover:text-emerald-600 transition duration-300 text-sm md:text-base font-medium">About</a>
+                        <a href="#skills" class="text-gray-700 hover:text-emerald-600 transition duration-300 text-sm md:text-base font-medium">Skills</a>
+                        <a href="#projects" class="text-gray-700 hover:text-emerald-600 transition duration-300 text-sm md:text-base font-medium">Projects</a>
+                        <a href="#feedback" class="text-gray-700 hover:text-emerald-600 transition duration-300 text-sm md:text-base font-medium">Feedback</a>
+                        <a href="#contact" class="text-gray-700 hover:text-emerald-600 transition duration-300 text-sm md:text-base font-medium">Contact</a>
+                    </div>
+
+                    <!-- Theme Toggle Button -->
+                    <div id="theme-toggle" class="theme-toggle-container flex items-center justify-between" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+                        <!-- Sun Icon (Light) -->
+                        <div class="theme-icon light-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <!-- Moon Icon (Dark) -->
+                        <div class="theme-icon dark-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            </svg>
+                        </div>
+                        <div class="theme-toggle-slider"></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="relative z-10">
+        <!-- 1. Hero Section -->
+        <section id="home" class="relative flex items-center justify-center min-h-[85vh] overflow-hidden">
+            <!-- Content placed over the spheres -->
+            <div class="container mx-auto px-6 py-24 text-center relative z-20 section-content max-w-5xl">
+                <p class="color-primary-text text-lg md:text-xl mb-3 uppercase tracking-widest font-semibold">
+                    Hello, I am
+                </p>
+                <!-- Updated gradient for text -->
+                <h1 class="text-6xl md:text-8xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-cyan-500">
+                    Asfak Malek
+                </h1>
+                <h2 class="text-2xl md:text-4xl text-gray-700 font-light mb-8">
+                    <span class="font-mono text-emerald-500">&lt;</span>Software Engineer<span class="font-mono text-emerald-500">/&gt;</span>
+                </h2>
+        </section>
+
+        <!-- 2. About Me Section -->
+        <section id="about" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 max-w-4xl section-content">
+                <div class="glass-panel p-8 md:p-12 rounded-3xl backdrop-saturate-150 transition-shadow duration-500 hover:shadow-2xl hover:shadow-emerald-200 dark:hover:shadow-emerald-200/90">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-6 color-primary-text text-center">About Me</h3>
+                    <div class="text-gray-700 leading-relaxed space-y-4 text-base md:text-lg">
+                        <p>
+                            I am a focused  Android and Java Developer  experienced in building user-centric mobile applications and robust backend systems. My expertise spans the full development lifecycle, from UI/UX design to API integration and debugging.
+                        </p>
+                        <p>
+                            I possess a strong skill set in core technologies including  Java, Dart, Android Studio, and Flutter . I have successfully built comprehensive systems like an  Employee Management System , various  Fitness Apps , and integrated solutions using the  OpenAI API .
+                        </p>
+                        <p>
+                            Beyond traditional development, I also have specialized training in  Business Central AL Programming  for creating custom hiring pipelines and management solutions within the Dynamics 365 ecosystem. I am committed to clean code, teamwork, and continuous learning.
+                        </p>
+                    </div>
+                    
+                    <!-- Button for About Section -->
+                    <div class="mt-10 text-center">
+                        <a href="#skills" class="glass-button inline-block w-full sm:w-auto px-8 py-3 font-semibold rounded-full shadow-lg">
+                            View Technical Skills &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section (Cards are also Glass Panels now) -->
+        <section id="skills" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 section-content">
+                <h3 class="text-3xl md:text-4xl font-bold mb-12 color-primary-text text-center">Technical Skills</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto">
+                    <!-- Skill Card 1: Mobile & Frontend (Updated icon color) -->
+                    <div class="glass-panel p-6 rounded-3xl shadow-lg hover:shadow-emerald-200/90 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:-translate-y-1">
+                        <span class="code-icon mb-3 text-cyan-500 block h-8 w-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-semibold mb-2 text-gray-700">Mobile & UI/UX</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>Android Studio</li>
+                            <li>Flutter</li>
+                             <li>Dart</li>
+                            <li>Java</li>
+                            <li>User-centric UI/UX Design</li>
+                        </ul>
+                    </div>
+                    <!-- Skill Card 2: Backend & Core Languages (Updated icon color) -->
+                    <div class="glass-panel p-6 rounded-3xl shadow-lg hover:shadow-emerald-200/90 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:-translate-y-1">
+                        <span class="code-icon mb-3 text-emerald-500 block h-8 w-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 8l-4 4 4 4"/></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-semibold mb-2 text-gray-700">Core Development</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>Java Programming</li>
+                            <li>REST APIs Integration</li>
+                            <li>Backend Systems Design</li>
+                            <li>Git, Debugging, Teamwork</li>
+                        </ul>
+                    </div>
+                    <!-- Skill Card 3: Data & ERP Systems (Updated icon color) -->
+                    <div class="glass-panel p-6 rounded-3xl shadow-lg hover:shadow-emerald-200/90 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:-translate-y-1">
+                        <span class="code-icon mb-3 text-orange-400 block h-8 w-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10m8-10v10m8-10v10M6 7h12M6 17h12M6 12h12"/></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-semibold mb-2 text-gray-700">Data & ERP</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>MySQL</li>
+                                <li>MongoDb</li>
+                            <li>Business Central AL (ERP)</li>
+                            <li>OpenAI API</li>
+                            <li>Data Structuring</li>
+                        </ul>
+                    </div>
+                    <!-- Skill Card 4: Education -->
+                    <div class="glass-panel p-6 rounded-3xl shadow-lg hover:shadow-emerald-200/90 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:-translate-y-1">
+                        <span class="code-icon mb-3 text-pink-500 block h-8 w-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v8"/></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-semibold mb-2 text-gray-700">Education</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>B.Tech CS (Parul University)</li>
+                            <li>CGPA: 6.98/10</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skill Card 5: Certifications -->
+                    <div class="glass-panel p-6 rounded-3xl shadow-lg hover:shadow-emerald-200/90 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:-translate-y-1">
+                        <span class="code-icon mb-3 text-yellow-500 block h-8 w-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.002 4.002L19 7l-4.004 2.002L17 13l-4.002-2.004L11 13l2.004-4.002L9 7l4.002-2.002L13 1M5 12h.01M19 12h.01M12 5h.01M12 19h.01M12 12h.01"/></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-semibold mb-2 text-gray-700">Certifications</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>Android App Dev (ShadowFox)</li>
+                            <li>JAVA Programming (Internpe)</li>
+                            <li>Data Analytics (IIT Roorkee)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Button for Skills Section -->
+                <div class="mt-12 text-center">
+                    <a href="#projects" class="glass-button inline-block w-full sm:w-auto px-8 py-3 font-semibold rounded-full shadow-lg">
+                        Explore My Projects &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Projects Section -->
+        <section id="projects" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 section-content">
+                <h3 class="text-3xl md:text-4xl font-bold mb-12 color-primary-text text-center">Featured Applications & Systems</h3>
+                <div class="space-y-8 max-w-5xl mx-auto">
+                    
+                    <!-- Project 1: Employee Management System (Updated colors) -->
+                    <div class="glass-panel p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-emerald-200/90 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:scale-[1.01]">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600">Employee Management System</h4>
+                        <p class="text-sm text-gray-700 mb-4">Java, MySQL, Backend Systems</p>
+                        <p class="text-gray-700 mb-4">
+                            A robust management system developed using  Java  and  MySQL . Key features include  secure login , generation of  unique IDs, and implementation of  Role-Based Access Control (RBAC)  to manage permissions effectively.
+                        </p>
+                        <a href="https://github.com/AsfakMalik786" class="text-emerald-600 hover:text-emerald-800 font-medium dark:text-emerald-400">View Project Details &rarr;</a>
+                    </div>
+
+                    <!-- Project 2: Wellbot Chatbot / Fitness App (Updated colors) -->
+                    <div class="glass-panel p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-emerald-200/90 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:scale-[1.01]">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600">Wellbot Chatbot & Fitness Tracker</h4>
+                        <p class="text-sm text-gray-700 mb-4">Android, OpenAI API, API Integration</p>
+                        <p class="text-gray-700 mb-4">
+                            Designed and built two core mobile applications:
+                            <ul class="list-disc list-inside ml-4 mt-2 space-y-1 text-gray-700">
+                                <li> Wellbot Chatbot : A modular healthcare chatbot integrated with the  OpenAI API  for intelligent responses.</li>
+                                <li> Fitness App : An Android application to track user workouts, monitor nutrition, and provide fitness metrics.</li>
+                            </ul>
+                        </p>
+                        <a href="https://github.com/AsfakMalik786" class="text-emerald-600 hover:text-emerald-800 font-medium dark:text-emerald-400">View Mobile Apps &rarr;</a>
+                    </div>
+                    
+                    <!-- Project 3: Candidate Management AL (Updated colors) -->
+                    <div class="glass-panel p-6 md:p-8 rounded-3xl shadow-lg hover:shadow-emerald-200/20 dark:hover:shadow-emerald-200/90 transition duration-300 transform hover:scale-[1.01]">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600">Candidate Management (Business Central AL)</h4>
+                        <p class="text-sm text-gray-700 mb-4">Business Central AL, Dynamics 365</p>
+                        <p class="text-gray-700 mb-4">
+                            Developed a custom module using  Business Central AL  to manage the entire hiring pipeline within the Dynamics 365 ERP system. This project streamlined candidate tracking, interview scheduling, and status updates for the HR team.
+                        </p>
+                        <a href="https://github.com/AsfakMalik786" class="text-emerald-600 hover:text-emerald-800 font-medium dark:text-emerald-400">View ERP Solution &rarr;</a>
+                    </div>
+                
+                </div>
+            </div>
+        </section>
+
+       
+
+        <!-- 6. Contact Section (Now Section 6) -->
+        <section id="contact" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 max-w-2xl text-center section-content">
+                 <div class="glass-panel p-8 md:p-12 rounded-3xl backdrop-saturate-150 transition-shadow duration-500 hover:shadow-2xl hover:shadow-emerald-200 dark:hover:shadow-emerald-200/90">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-6 color-primary-text">Get In Touch</h3>
+                    <p class="text-gray-700 text-lg mb-8">
+                        I am actively seeking roles in Mobile and Java development. Feel free to connect or send me an email!
+                    </p>
+                    <div class="space-y-4">
+                        <!-- Email Link - Now using glass-button style -->
+                        <a href="mailto:asfakmalek078@gmail.com" class="glass-button inline-flex items-center justify-center w-full md:w-auto mx-auto px-8 py-4 font-semibold rounded-3xl text-lg shadow-xl transition duration-300 transform hover:scale-[1.02] text-emerald-700 dark:text-emerald-300">
+                            <!-- Using a placeholder icon with the correct color scheme -->
+                            <img src="email.png" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26c.45.3.96.44 1.5.44s1.05-.14 1.5-.44L21 8m-9 9l-9 5m9-5l9 5m-9-5V7"></path>
+                        </img>
+                            asfakmalek078@gmail.com
+                        </a>
+                        
+                        <p class="text-gray-700 pt-4">
+                            Connect with me:
+                        </p>
+                        <div class="flex justify-center space-x-6">
+                            <!-- Social Media Icons (Now using the new .social-glass-icon style) -->
+                            <a href="https://www.linkedin.com/in/asfak-malek-99335a301" target="_blank" class="social-glass-icon">
+                                <img src="linkedin.png" alt="LinkedIn" class="h-7 w-7">
+                            </a>
+                            
+                            <a href="https://www.instagram.com/er_asfak__" target="_blank" class="social-glass-icon">
+                                <img src="instagram.png" alt="Instagram" class="h-7 w-7" />
+                            </a>
+
+                            <a href="https://wa.me/9265107470" target="_blank"  class="social-glass-icon">
+                                <img src="whatsapp.png" alt="WhatsApp" class="h-7 w-7" />
+                            </a>
+                            
+                            <a href="https://github.com/AsfakMalik786" target="_blank" class="social-glass-icon">
+                                <img src="github.png" alt="Github" class="h-7 w-7" >
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 py-6 rounded-t-3xl transition-colors duration-300" style="background: var(--footer-bg); border-top: 1px solid rgba(255, 255, 255, 0.4);">
+        <div class="container mx-auto px-6 text-center text-gray-500 dark:text-gray-300 text-sm">
+            &copy; 2024 Asfak Malek. Glassmorphism Portfolio.
+        </div>
+    </footer>
+
+    <script>
+        // --- THEME TOGGLE LOGIC ---
+        const body = document.body;
+        const toggle = document.getElementById('theme-toggle');
+
+        function isDarkMode() {
+            return body.classList.contains('dark');
+        }
+
+        function toggleTheme() {
+            if (isDarkMode()) {
+                // Switch to Light Mode
+                body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                toggle.setAttribute('aria-checked', 'false');
+            } else {
+                // Switch to Dark Mode
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                toggle.setAttribute('aria-checked', 'true');
+            }
+        }
+
+        function initTheme() {
+            // Check for user preference in localStorage
+            const savedTheme = localStorage.getItem('theme');
+            
+            // Check for system preference if no localStorage preference is found
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                body.classList.add('dark');
+                toggle.setAttribute('aria-checked', 'true');
+            } else {
+                // Default to light mode
+                body.classList.remove('dark');
+                toggle.setAttribute('aria-checked', 'false');
+            }
+        }
+        
+        // --- SECTION TRANSITIONS (INTERSECTION OBSERVER) ---
+
+        function setupTransitions() {
+            const sections = document.querySelectorAll('.section-content');
+
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            // 1. Initialize the theme based on storage/system preference
+            initTheme();
+
+            // 2. Attach the click listener to the toggle button
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+            // 3. Setup scroll-based transitions
+            setupTransitions();
+        };
+
+    </script>
+</body>
+</html>
